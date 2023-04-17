@@ -9,7 +9,7 @@ return [
     |
     */
 
-    'version' => '4.0.0-beta.1',
+    'version' => '4.0.1',
     'repository' => 'https://github.com/Bubka/2FAuth',
     'latestReleaseUrl' => 'https://api.github.com/repos/Bubka/2FAuth/releases/latest',
 
@@ -79,7 +79,7 @@ return [
     */
 
     'preferences' => [
-        'showTokenAsDot' => false,
+        'showOtpAsDot' => false,
         'closeOtpOnCopy' => false,
         'copyOtpOnDisplay' => false,
         'useBasicQrcodeReader' => false,

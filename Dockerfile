@@ -1,6 +1,6 @@
 ARG BUILDPLATFORM=linux/amd64
 ARG TARGETPLATFORM
-ARG ALPINE_VERSION=3.16
+ARG ALPINE_VERSION=3.17
 ARG PHP_VERSION=8.1-alpine${ALPINE_VERSION}
 ARG COMPOSER_VERSION=2.3
 ARG SUPERVISORD_VERSION=v0.7.3
@@ -45,28 +45,28 @@ COPY --from=supervisord --chown=${UID}:${GID} /bin /usr/local/bin/supervisord
 # Install PHP and PHP system dependencies
 RUN apk add --update --no-cache \
     # PHP
-    php8 \
+    php81 \
     # Composer dependencies
-    php8-phar \
+    php81-phar \
     # PHP SQLite driver
-    php8-pdo_sqlite php8-sqlite3 \
+    php81-pdo_sqlite php81-sqlite3 \
     # PHP extensions
-    php8-xml php8-gd php8-mbstring php8-tokenizer php8-fileinfo php8-bcmath php8-ctype php8-dom \
+    php81-xml php81-gd php81-mbstring php81-tokenizer php81-fileinfo php81-bcmath php81-ctype php81-dom \
     # Runtime dependencies
-    php8-session php8-openssl \
+    php81-session php81-openssl \
     # Nginx and PHP FPM to serve over HTTP
-    php8-fpm nginx
+    php81-fpm nginx
 
 # PHP FPM configuration
 # Change username and ownership in php-fpm pool config
-RUN sed -i '/user = nobody/d' /etc/php8/php-fpm.d/www.conf && \
-    sed -i '/group = nobody/d' /etc/php8/php-fpm.d/www.conf && \
-    sed -i '/listen.owner/d' /etc/php8/php-fpm.d/www.conf && \
-    sed -i '/listen.group/d' /etc/php8/php-fpm.d/www.conf
+RUN sed -i '/user = nobody/d' /etc/php81/php-fpm.d/www.conf && \
+    sed -i '/group = nobody/d' /etc/php81/php-fpm.d/www.conf && \
+    sed -i '/listen.owner/d' /etc/php81/php-fpm.d/www.conf && \
+    sed -i '/listen.group/d' /etc/php81/php-fpm.d/www.conf
 # Pre-create files with the correct permissions
 RUN mkdir /run/php && \
-    chown ${UID}:${GID} /run/php /var/log/php8 && \
-    chmod 700 /run/php /var/log/php8
+    chown ${UID}:${GID} /run/php /var/log/php81 && \
+    chmod 700 /run/php /var/log/php81
 
 # NGINX
 # Clean up
